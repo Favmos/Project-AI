@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CyberSafeGuard</title>
 
@@ -31,7 +32,6 @@
       <div class="container">
         <!-- Logo -->
         <div class="navbar-header">
-          <!-- <img src={{ url_for('static', filename='/images/logo.png') }} alt="Orbit Logo" width="50" height="50" align="left"> -->
           <a class="navbar-brand" href="#halamanku">CyberSafe<span>Guard</span>.</a>
         </div>
 
@@ -41,7 +41,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#detection">Phishing Detection</a></li>
-            <li><a href="#safebot">SafeBot</a></li>
+            <li><a href="/chatbot">SafeBot</a></li>
             <li><a href="#team">Team</a></li>
             <!-- <li><a href="#contact">Contact</a></li> -->
           </ul>
@@ -50,11 +50,14 @@
     </nav>
 
     <!-- Landing Page -->
-    <div id="home" class="container-fluid" style="background: url('{{ url_for('static', filename='images/hero.png') }}'); width: 100%;
+    <div id="home" class="container-fluid" style="
+    width: 100%;
     height: 100vh;
     position: relative;
     background-size: cover;
-    background-position: center;">
+    background-position: center;
+    background: url('{{ url_for('static', filename='images/hero.png') }}');
+    ">
       <br>
       <br>
       <br>
@@ -132,7 +135,7 @@
           <nav id="navgo" class="navbar" style="background-color:#ffffff;z-index: 0;">
             <ul class="nav nav-pills">
               <li class="nav-item">
-                <a class="btn btn-default btn-lg" href="#safebot" style="background-color:#4e6e81; color: #fff !important;">Go</a>
+                <a class="btn btn-default btn-lg" href="/chatbot" style="background-color:#4e6e81; color: #fff !important;">Go</a>
               </li>
             </ul>
           </nav>
@@ -151,68 +154,23 @@
                 <img style="margin-left: 100px;" src={{ url_for('static', filename='/images/image1.png') }} width="700" height="500"></img>
             </div>
             <div class="col-sm-6">
-                <br><br><br><br><br><br><br>
-                <!-- Input URL dari Pengguna -->
-                <div class="col-lg-6" style="margin-left: 50px;">
-    
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon3">Input URL</span>
-                        <input type="text" class="form-control" id="input_link" onInput="$('#inputVal_link').html($(this).val())" placeholder="example.com/users/" aria-label="https://example.com/users/" aria-describedby="basic-addon3">
-                    </div>  <br><br>               
-                    <button type="submit" id="prediksi_submit" class="btn btn-outline-secondary" style="background-color:#4e6e81; color: #fff">Predict</button>
-                    </br>
-                </div>
-                <!-- Bagian Halaman untuk Hasil Prediksi -->
-                <!-- <div id="hasil_prediksi" align="center">
-                        Hasil Prediksi akan ditampilkan di sini
-                </div> -->
-                <div id="hasil_prediksi" align="center">
-                  <h3 class="text-center">Hasil Prediksi</h2>
-                    {% if hasil_prediksi %}
-                    <p class="text-center">Link tersebut diprediksi <span class="fw-bold">{{hasil_prediksi}}</span></p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
-    </div>
-    <!-- Bagian Halaman (Aplikasi SafeBot) -->
-    <div id="safebot" data-bs-spy="scroll" data-bs-target="#navgo" data-bs-offset="0" class="scrollspy-example" tabindex="0">
-        <br>
-        <br>
-        <div class="row">
-          <h2 class="centered">Chatbot</h2>
-          <br><br>
-          <!-- HP 1 (Oknum) -->
-          <div class="phone_bg1"><br>
-            <div class="chat-box1">
-              <!-- Header 1 (Oknum) -->
-              <div class="chat-box-header1">SafeBot</div>
-                <div class="chat-box-body1">
-                  <div class="chat-box-overlay1"></div>
-                  <div class="chat-logs1">
-                    <!-- Chat Log 1 (Oknum) -->
-                    <div id="cm-msg1" class= "chat-msg">
-                      <div class="cm-msg-text1">
-                        Halo, Selamat Datang di SafeBot. SafeBot akan membantu Anda para pengguna internet agar tetap aman dalam beraktivitas di dunia maya. 
-                        Silakan ajukan pertanyaan Anda.
-                      </div>
-                    </div>
+              <br><br><br><br><br><br><br>
+              <!-- Input URL dari Pengguna -->
+              <div class="col-lg-6" style="margin-left: 50px;">
+                  <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon3">Input URL</span>
+                      <input name="data" type="text" class="form-control" id="inputVal_link" onInput="$('#inputVal_link').html($(this).val())" placeholder="example.com/users/" aria-label="https://example.com/users/" aria-describedby="basic-addon3">
+                  </div>
+                  <div id="hasil_prediksi" style="background-color: #ececec; color: #1f1e1e; margin-top: 50px; padding: 20px; border-radius: 10px; height: 250px;">                   
+                   
                   </div>
                 </div>
+              <div>
+                <button type="submit" id="prediksi_submit" class="btn btn-outline-secondary" style="background-color:#4e6e81; color: #fff">Predict</button>
+              </div>
+              <!-- Bagian Halaman untuk Hasil Prediksi -->
               
-                <div class="chat-input">      
-                  <form>
-                    <!-- Input Chat 1 (Oknum) -->
-                    <input type="text" id="chat-input" placeholder="Message"/>
-                    
-                    <!-- Tombol Send 1 (Oknum) -->
-                    <button type="submit" class="chat-submit" id="chat-submit"><i data-feather="send"></i></button>
-                  </form>      
-                </div>
-            </div>
-          </div>
+          </div>          
         </div>
         <br>
         <br>
